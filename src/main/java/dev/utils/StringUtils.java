@@ -1,5 +1,7 @@
 package dev.utils;
 
+import customexceptions.EmptyCharSequenceException;
+
 /** Classe qui fournit des services de traitements de chaines de caractères
 * @author DIGINAMIC
 */
@@ -8,8 +10,16 @@ public final class StringUtils {
 	* @param lhs chaine 1
 	* @param rhs chaine 2
 	* @return distance
+	 * @throws EmptyCharSequenceException 
 	*/
-	public static int levenshteinDistance(CharSequence lhs, CharSequence rhs) {
+	public static int levenshteinDistance(CharSequence lhs, CharSequence rhs) throws EmptyCharSequenceException {
+		
+		if(lhs == null || rhs == null)
+		{
+			EmptyCharSequenceException ex = new EmptyCharSequenceException("L'un des deux CharSequence est vide");
+			throw ex;
+		}
+		
 		int len0 = lhs.length() + 1;
 		int len1 = rhs.length() + 1;
 		
